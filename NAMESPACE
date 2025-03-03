@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("stats", "median", "rbeta", "sd")
+importFrom("utils", "read.table", "write.table")
+

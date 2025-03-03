@@ -1,0 +1,31 @@
+Package: DiffDomainSpectrum
+Type: Package
+Title: DiffDomain-Spectrum: enhanced detection of fine-scale
+ TAD reorganizations across bulk and pseudo-bulk Hi-C data
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Jiadi", "Zhu",
+      email = "2160090406@email.szu.edu.cn",
+      role = c("aut", "cre")
+    )
+  )
+Description: Topologically associating domains (TADs) are structural units of 
+    higher-order chromatin organization. Evidence increasingly highlights the 
+    association between reorganized TADs and key biological processes, including 
+    disease progression. However, current methods are limited in detecting 
+    fine-scale TAD reorganizations and analyzing sparse pseudo-bulk Hi-C data, 
+    which is typically derived from aggregating emerging single-cell Hi-C data. 
+    To address these challenges, we introduce DiffDomain-Spectrum, an enhanced 
+    method for identifying reorganized TADs. Unlike DiffDomain which only uses 
+    the largest eigenvalue of the normalized difference Hi-C matrix, DiffDomain
+    Spectrum leverages the full distribution of all eigenvalues, enabling 
+    detection of TAD reorganization not affecting the largest eigenvalue. 
+    Benchmarking on truly reorganized TADs using bulk Hi-C data demonstrates 
+    that DiffDomain-Spectrum captures all detections made by DiffDomain while 
+    achieving a 10% higher true positive rate. 
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Imports: future, furrr, strawr, stringr
