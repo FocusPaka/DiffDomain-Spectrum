@@ -32,7 +32,7 @@ DiffDomain_Spectrum_parallel <- function(tadlist_path,
                                          save_path='output.txt'){
     tadlist <- read.table(tadlist_path,header = T)
     future::plan('multisession', workers=round(parallel::detectCores()*core_num_prop))
-    y <- furrr::future_map(.x=1:100,     #seq_len(nrow(tadlist)),
+    y <- furrr::future_map(.x=seq_len(nrow(tadlist)),
                     .f=identifyTADs_HiC,
                     tadlist=tadlist,
                     fhic0 = fhic0,

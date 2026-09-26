@@ -1,0 +1,41 @@
+# Conda environment for SPECTRUM-based differential TAD analysis
+#
+# Created for portability across Linux / macOS / WSL.
+# Naming: keep the `name:` below identical to the `--name` you pass to
+# `conda env create`, e.g.
+#     conda env create --name spectrum -f environment.yml
+#
+# NOTE
+#   * Direct dependencies are intentionally left unpinned so that conda can
+#     resolve a working combination on the user's platform. This is the
+#     portable version. To reproduce one exact machine, export a locked file
+#     instead:
+#         conda activate <your-env>
+#         conda env export --no-builds | grep -v '^prefix:' > environment.lock.yml
+#     then clean up the leaked absolute paths / mirror URLs before committing.
+#   * `hic-straw` (import name: `hicstraw`) is not distributed on conda, so it
+#     is installed through pip below. It ships prebuilt wheels for common
+#     platforms and needs to read .hic files only (not needed for .cool input).
+
+name: spectrum
+
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults          # avoid implicitly pulling in the `defaults` channel
+
+dependencies:
+  - python=3.10         # cooler requires python >=3.9
+  - numpy
+  - pandas
+  - scipy
+  - h5py                # HDF5 backend used by cooler (.cool files)
+  - cooler              # read/write .cool and .mcool matrices
+  - matplotlib
+  - seaborn             # used by the `visualization` subcommand
+  - docopt              # command line parsing
+  - joblib              # parallel Monte-Carlo in the full-spectrum test (functions.py)
+  - statsmodels         # FDR adjustment in the `adjustment` subcommand
+  - pip
+  - pip:
+      - hic-straw       # import hicstraw -- reads .hic files

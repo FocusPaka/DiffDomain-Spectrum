@@ -24,7 +24,7 @@ Description: Topologically associating domains (TADs) are structural units of
     Benchmarking on truly reorganized TADs using bulk Hi-C data demonstrates 
     that DiffDomain-Spectrum captures all detections made by DiffDomain while 
     achieving a 10% higher true positive rate. 
-License: GPL-2
+License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

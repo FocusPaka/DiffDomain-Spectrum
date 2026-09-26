@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------- R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+*.Rproj
+*.tar.gz
+*.Rcheck/
+*.Rproj
+
+# ------------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ------------------------------------------- local test scripts (NOT published)
+command.sh
+python/command.sh
+
+# ------------------------------------------ Hi-C data & outputs: never commit
+# (these files are hundreds of MB to several GB)
+*.hic
+*.cool
+*.mcool
+*.h5
+*.hdf5
+*.bw
+*.bigwig
+data/
+results/
+results_*.txt
+*.out
+nohup.out
+
+# ------------------------------------------------------------ OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
