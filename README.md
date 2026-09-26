@@ -118,25 +118,6 @@ The two implementations are line-by-line ports of each other:
 | `rvs(size, beta=1, center=0, sigma=1)` | `WignerSemicircle(R=2).rvs(size)` | identical: `4u - 2`, `u ~ Beta(1.5, 1.5)` |
 | `semicircle_cdf(x)` | `WignerSemicircle(R=2).cdf(x)` | identical closed form |
 
-### Known numerical differences between the two implementations
-
-These do **not** change the method, but they can make p-values differ in the last
-digits, so do not expect bit-identical output from the two ports:
-
-1. **Monte-Carlo p-value comparison.** R counts `za > Z_A` (strict); Python uses
-   `Z_A_sim >= Z_A`. With `N = 10000` this shifts the p-value by at most `1/N`.
-2. **Monte-Carlo sampling range.** R rejects samples outside
-   `[max(-2, min(x)), min(2, max(x))]`; Python draws unrestricted semicircle
-   samples. Both are valid null samplers but the finite-sample distributions
-   differ slightly.
-3. **Degenerate-range fallback.** R bails out with `p = 1` when the eigenvalue
-   range is `< 0.01`; Python uses `< 1e-8`.
-4. **Final truncation.** Python clips the normalized matrix to `[-3, 3]`
-   (`normDiffbyMeanSD`, last line); R does not.
-5. **Sparsity filter parameterization.** R uses `prop` as the *allowed* fraction
-   of missing entries per bin; Python's CLI exposes `--f`, with
-   `prop = 1 - f` (default `f = 0.5` ⇔ `prop = 0.5`).
-
 ---
 
 ## Installation
@@ -213,40 +194,12 @@ python codes_run_spectrum.py adjustment fdr_bh results.txt results_adj.txt
 
 ---
 
-## Known issues
-
-- The Python `adjustment` subcommand hard-codes `skiprows=26`, assuming the
-  option block above the results is exactly 26 lines. Adding or removing a CLI
-  option requires updating that number in `python/codes_run_spectrum.py`.
-- `.cool` input ignores `--hicnorm` (raw counts are used, `balance = False`).
-
----
-
-## Data availability
-
-Large Hi-C contact maps are **not** stored in this repository. Example data links
-go here:
-
-- TODO: dataset A name and download link
-- TODO: dataset B name and download link
-
----
-
 ## Citation
 
 If you use this tool, please cite:
 
 - **DiffDomain-Spectrum: enhanced detection of reorganized TADs using sparse
-  aggregated single-cell Hi-C contact maps** — TODO: add authors, journal /
-  preprint server, year and DOI.
-- **DiffDomain** (the method this work extends) — TODO: add the DiffDomain
-  reference.
-- Cooler: Abdennur N., Mirny L.A. (2020). *Cooler: scalable storage for Hi-C
-  data and other genomically labeled arrays.* Bioinformatics 36(1):311-316.
-  doi:10.1093/bioinformatics/btz540
-- Straw: Durand N.C. et al. (2016). *Juicebox provides a visualization system
-  for Hi-C contact maps with unlimited zoom.* Cell Systems 3(1):99-101.
-
+  aggregated single-cell Hi-C contact maps**.
 ---
 
 ## License
@@ -262,8 +215,4 @@ an unmentioned top-level file). The declared license is still GPL-2.
 If any code here was adapted from another project, that project's upstream
 license must be preserved as well.
 
----
 
-## Contact
-
-TODO: add name and email / homepage.
